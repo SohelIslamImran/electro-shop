@@ -1,24 +1,51 @@
-import logo from './logo.svg';
+import { createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from "react-router-dom";
 import './App.css';
+import AddProduct from "./components/AddProduct/AddProduct";
+import Admin from "./components/Admin/Admin";
+import Checkout from "./components/Checkout/Checkout";
+import Header from './components/Header/Header';
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Orders from "./components/Orders/Orders";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
+  const [cart, setCart] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{ loggedInUser, setLoggedInUser, cart, setCart }}>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <PrivateRoute path="/admin">
+            <Admin />
+          </PrivateRoute>
+          <PrivateRoute path="/addProduct">
+            <AddProduct />
+          </PrivateRoute>
+          <PrivateRoute path="/checkout">
+            <Checkout />
+          </PrivateRoute>
+          <PrivateRoute path="/orders">
+            <Orders />
+          </PrivateRoute>
+        </Switch>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
