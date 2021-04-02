@@ -10,7 +10,7 @@ const Product = (props) => {
     return (
         <Col>
             <Card className="shadow mb-4" style={{ borderRadius: "20px", border: 0 }}>
-                <div style={{ maxwidth: "300px", height: "300px"}}>
+                <div className="d-flex align-items-center p-2" style={{ maxwidth: "300px", height: "300px"}}>
                     <Card.Img
                         className="w-100"
                         style={{ objectFit: "contain", maxHeight: "300px" }}
@@ -18,7 +18,7 @@ const Product = (props) => {
                         src={productImage}
                     />
                 </div>
-                <Card.Body>
+                <Card.Body className="pb-0">
                     <Card.Title as={"h4"} >{productName}</Card.Title>
                 </Card.Body>
                 <Card.Body className="d-flex justify-content-between align-items-center">

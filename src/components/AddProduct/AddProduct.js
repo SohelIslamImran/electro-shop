@@ -15,7 +15,9 @@ const AddProduct = () => {
             category: data.category,
             productImage: imageURL
         }
-
+        if (!imageURL) {
+           return alert('Please wait for the image upload')
+       }
         axios.post('https://electro-server.herokuapp.com/addProduct', productInfo)
             .then(response => {
                 response.data && console.log("Successfully Added");
@@ -33,7 +35,6 @@ const AddProduct = () => {
         axios.post('https://api.imgbb.com/1/upload', imageData)
             .then(response => {
                 setImageURL(response.data.data.display_url);
-                console.log(response.data.data.display_url);
             })
             .catch(error => {
                 console.log(error);

@@ -36,8 +36,8 @@ const Home = () => {
                 <input name="keyword" type="text" ref={register} className="search-input" placeholder="Search" />
                 <button className="search-btn">Search</button>
             </form>
-            <PuffLoader loading={loading} css={loaderStyle} size={150} />
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <PuffLoader loading={loading} css={loaderStyle} color={"#FF4B2B"} size={150} />
+            <Row xs={1} md={2} lg={3} className="g-4 mt-5">
                 {
                     products.map(product => <Product key={product._id} product={product} />)
                 }

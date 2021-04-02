@@ -7,12 +7,9 @@ import { UserContext } from '../../App';
 const Checkout = () => {
     const { loggedInUser } = useContext(UserContext);
     const { cart } = useContext(UserContext);
-    console.log(cart);
 
     const handleCheckout = () => {
         const oderDetails = { ...loggedInUser, product: cart, orderTime: new Date() };
-
-        console.log(oderDetails);
 
         axios.post('https://electro-server.herokuapp.com/addOrder', oderDetails)
             .then(response => {
@@ -51,7 +48,7 @@ const Checkout = () => {
                 </Table>
             </div>
             <div className="text-right">
-                <Button as={Link} to="/orders" onClick={handleCheckout} className="checkout-btn">Checkout</Button>
+                <Button onClick={handleCheckout} className="checkout-btn shadow-none">Checkout</Button>
             </div>
         </Container>
     );

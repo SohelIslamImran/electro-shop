@@ -30,7 +30,6 @@ const Login = () => {
         handleGoogleSignIn()
             .then(res => {
                 setUser(res);
-                console.log(res);
                 history.replace(from);
             });
     }
