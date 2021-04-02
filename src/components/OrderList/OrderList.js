@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 const OrderList = ({ order }) => {
-    const { _id, productName, price, productImage } = order.product
+    const { _id, productName, price, productImage, category } = order.product
 
     return (
         <Col md={6}>
@@ -16,7 +16,7 @@ const OrderList = ({ order }) => {
                             <Card.Title>{productName}</Card.Title>
                             <Card.Text>
                                 <ul type="none">
-                                    <li>#{_id?.slice(0, 10)}</li>
+                                    <li>{category}</li>
                                     <li>{(new Date(order.orderTime).toDateString('dd/MM/yyyy'))}</li>
                                     <li>${price}</li>
                                 </ul>

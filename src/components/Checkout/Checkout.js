@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const Checkout = () => {
