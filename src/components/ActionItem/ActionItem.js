@@ -18,7 +18,7 @@ const ActionItem = (props) => {
                             as={"label"}
                             htmlFor="upload"
                             variant="outline-success"
-                            className="p-1"
+                            className="p-1 mb-0"
                             onClick={() => props.handleEditItem(_id)}>
                             <FiEdit style={{ fontSize: "1.2rem" }} />
                         </Button>
@@ -26,7 +26,7 @@ const ActionItem = (props) => {
                             as={"label"}
                             htmlFor="upload"
                             variant="outline-danger"
-                            className="p-1 ml-2"
+                            className="p-1 ml-2 mb-0"
                             onClick={() => props.handleDeleteItem(_id)}>
                             <RiDeleteBinLine style={{ fontSize: "1.3rem" }} />
                         </Button>

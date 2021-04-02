@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 const OrderList = ({ order }) => {
-    const { _id, productName, price, productImage, category } = order.product
+    const { productName, price, productImage, category } = order.product
 
     return (
         <Col md={6}>
