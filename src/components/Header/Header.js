@@ -1,30 +1,18 @@
-import firebase from "firebase/app";
-import "firebase/auth";
 import React, { useContext } from 'react';
 import { Button, Container, Image, Nav, Navbar, OverlayTrigger, Popover } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
-import firebaseConfig from '../Login/firebaseConfig';
-
-!firebase.apps.length && firebase.initializeApp(firebaseConfig);
+import { handleSignOut, initializeLoginFramework } from '../Login/LoginManager';
 
 const Header = () => {
     const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
-    const handleSignOut = () => {
-        firebase
-            .auth()
-            .signOut()
+    initializeLoginFramework();
+    const signOut = () => {
+        handleSignOut()
             .then(res => {
-                const signedOutUser = {
-                    isSignedIn: false,
-                    userName: "",
-                    email: "",
-                    userPhoto: ""
-                }
-                setLoggedInUser(signedOutUser);
+                setLoggedInUser(res)
             })
-            .catch(error => console.log(error.message))
     }
 
     return (
@@ -34,7 +22,7 @@ const Header = () => {
                     <h1
                         className="d-inline-block align-top"
                         style={{ fontSize: "1.8rem", fontWeight: "bold" }}>
-                        Electro.
+                        Electro<span className="dot">.</span>
                     </h1>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -61,7 +49,7 @@ const Header = () => {
                                                     <strong className="text-center d-block">{loggedInUser.userName}</strong>
                                                     <strong className="text-center d-block">{loggedInUser.email}</strong>
                                                     <div className="d-flex justify-content-center mt-1">
-                                                        <Button onClick={handleSignOut}
+                                                        <Button onClick={signOut}
                                                             variant="outline-danger"
                                                             className="shadow-none py-0 px-1"
                                                             size="sm">Logout</Button>
@@ -72,7 +60,7 @@ const Header = () => {
                                     >
                                         <Nav.Link>
                                             <Image
-                                                src={loggedInUser.userPhoto}
+                                                src={loggedInUser.userPhoto || "https://i.ibb.co/5GzXkwq/user.png"}
                                                 width="40"
                                                 height="40"
                                                 roundedCircle
@@ -84,7 +72,7 @@ const Header = () => {
                                 }
                             </>
                             :
-                            <Button as={Link} to="login" className="shadow-none px-4 py-2" variant="info">
+                            <Button as={Link} to="login" className="shadow-none login-btn">
                                 Login
                             </Button>
                         }

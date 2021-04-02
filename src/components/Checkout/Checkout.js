@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../../App';
 
 const Checkout = () => {
@@ -50,7 +51,7 @@ const Checkout = () => {
                 </Table>
             </div>
             <div className="text-right">
-                <Button onClick={handleCheckout} variant="primary" size="lg">Checkout</Button>
+                <Button as={Link} to="/orders" onClick={handleCheckout} className="checkout-btn">Checkout</Button>
             </div>
         </Container>
     );

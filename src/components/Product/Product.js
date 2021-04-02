@@ -23,18 +23,16 @@ const Product = (props) => {
                 </Card.Body>
                 <Card.Body className="d-flex justify-content-between align-items-center">
                     <Card.Title
-                        as={"h3"}
+                        as={"h2"}
                         className="mb-1"
-                        style={{ fontWeight: "600" }}>
+                        style={{ fontWeight: "600", color: "#FF4B2B"}}>
                         ${price}
                     </Card.Title>
                     <Button
                         as={Link}
                         to="checkout"
                         onClick={() => setCart(props.product)}
-                        variant="info"
-                        className="py-2 px-4"
-                        style={{ borderRadius: "10px"}}>
+                        className="buy-btn shadow-none">
                         Buy Now
                     </Button>
                 </Card.Body>

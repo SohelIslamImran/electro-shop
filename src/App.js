@@ -30,13 +30,13 @@ function App() {
           <PrivateRoute path="/panel/:adminPanel">
             <Admin />
           </PrivateRoute>
+          <Route path="/login">
+            <Login />
+          </Route>
           <div>
             <Header />
             <Route exact path="/">
               <Home />
-            </Route>
-            <Route path="/login">
-              <Login />
             </Route>
             <Route path="/deals">
               <Home />
