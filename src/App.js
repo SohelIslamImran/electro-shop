@@ -1,11 +1,11 @@
 import { createContext, useState } from "react";
 import {
   BrowserRouter as Router,
+
   Route,
   Switch
 } from "react-router-dom";
 import './App.css';
-import AddProduct from "./components/AddProduct/AddProduct";
 import Admin from "./components/Admin/Admin";
 import Checkout from "./components/Checkout/Checkout";
 import Header from './components/Header/Header';
@@ -23,26 +23,31 @@ function App() {
   return (
     <UserContext.Provider value={{ loggedInUser, setLoggedInUser, cart, setCart }}>
       <Router>
-        <Header />
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
           <PrivateRoute path="/admin">
             <Admin />
           </PrivateRoute>
-          <PrivateRoute path="/addProduct">
-            <AddProduct />
+          <PrivateRoute path="/panel/:adminPanel">
+            <Admin />
           </PrivateRoute>
-          <PrivateRoute path="/checkout">
-            <Checkout />
-          </PrivateRoute>
-          <PrivateRoute path="/orders">
-            <Orders />
-          </PrivateRoute>
+          <div>
+            <Header />
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/deals">
+              <Home />
+            </Route>
+            <PrivateRoute path="/checkout">
+              <Checkout />
+            </PrivateRoute>
+            <PrivateRoute path="/orders">
+              <Orders />
+            </PrivateRoute>
+          </div>
         </Switch>
       </Router>
     </UserContext.Provider>

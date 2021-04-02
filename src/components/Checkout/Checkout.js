@@ -13,7 +13,7 @@ const Checkout = () => {
 
         console.log(oderDetails);
 
-        axios.post('http://localhost:5000/addOrder', oderDetails)
+        axios.post('https://electro-server.herokuapp.com/addOrder', oderDetails)
             .then(response => {
                 response.data && console.log("Successfully Added");
             })

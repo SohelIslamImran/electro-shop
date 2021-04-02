@@ -9,16 +9,34 @@ const Product = (props) => {
 
     return (
         <Col>
-            <Card className="shadow">
-                <div style={{ width: "300px", height: "300px" }}>
-                    <Card.Img className="w-100 h-100" variant="top" src={productImage} />
+            <Card className="shadow mb-4" style={{ borderRadius: "20px", border: 0 }}>
+                <div style={{ maxwidth: "300px", height: "300px"}}>
+                    <Card.Img
+                        className="w-100"
+                        style={{ objectFit: "contain", maxHeight: "300px" }}
+                        variant="top"
+                        src={productImage}
+                    />
                 </div>
                 <Card.Body>
-                    <Card.Title>{productName}</Card.Title>
+                    <Card.Title as={"h4"} >{productName}</Card.Title>
                 </Card.Body>
-                <Card.Body>
-                    <Card.Title>${price}</Card.Title>
-                    <Button as={Link} to="checkout" onClick={() => setCart(props.product)} variant="primary">Buy Now</Button>
+                <Card.Body className="d-flex justify-content-between align-items-center">
+                    <Card.Title
+                        as={"h3"}
+                        className="mb-1"
+                        style={{ fontWeight: "600" }}>
+                        ${price}
+                    </Card.Title>
+                    <Button
+                        as={Link}
+                        to="checkout"
+                        onClick={() => setCart(props.product)}
+                        variant="info"
+                        className="py-2 px-4"
+                        style={{ borderRadius: "10px"}}>
+                        Buy Now
+                    </Button>
                 </Card.Body>
             </Card>
         </Col >

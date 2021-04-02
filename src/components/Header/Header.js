@@ -1,31 +1,95 @@
-import React from 'react';
-import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import firebase from "firebase/app";
+import "firebase/auth";
+import React, { useContext } from 'react';
+import { Button, Container, Image, Nav, Navbar, OverlayTrigger, Popover } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../App';
+import firebaseConfig from '../Login/firebaseConfig';
+
+!firebase.apps.length && firebase.initializeApp(firebaseConfig);
 
 const Header = () => {
+    const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+
+    const handleSignOut = () => {
+        firebase
+            .auth()
+            .signOut()
+            .then(res => {
+                const signedOutUser = {
+                    isSignedIn: false,
+                    userName: "",
+                    email: "",
+                    userPhoto: ""
+                }
+                setLoggedInUser(signedOutUser);
+            })
+            .catch(error => console.log(error.message))
+    }
+
     return (
         <Container className="mb-5 mt-2">
-            <Navbar bg="dark" expand="lg" variant="dark">
-                    <Navbar.Brand as={Link} to="/">
-                        <img
-                            src="https://i.ibb.co/0jY2wPb/logo-8.png"
-                            height="40"
-                            className="d-inline-block align-top"
-                            alt="React Bootstrap logo"
-                        />
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="ml-auto">
-                            <Nav.Link as={Link} to="/" className="mr-4" active>Home</Nav.Link>
-                            <Nav.Link as={Link} to="orders" className="mr-4" active>Orders</Nav.Link>
-                            <Nav.Link as={Link} to="admin" className="mr-4" active>Admin</Nav.Link>
-                            <Nav.Link as={Link} to="deals" className="mr-4" active>Deals</Nav.Link>
-                            <Button as={Link} to="login" className="shadow-none" variant="primary">
+            <Navbar className="shadow-none" expand="lg">
+                <Navbar.Brand as={Link} to="/">
+                    <h1
+                        className="d-inline-block align-top"
+                        style={{ fontSize: "1.8rem", fontWeight: "bold" }}>
+                        Electro.
+                    </h1>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="ml-auto">
+                        <Nav.Link as={Link} to="/" className="mr-4" active style={{ fontWeight: "500" }}>Home</Nav.Link>
+                        <Nav.Link as={Link} to="orders" className="mr-4" active style={{ fontWeight: "500" }}>Orders</Nav.Link>
+                        <Nav.Link as={Link} to="admin" className="mr-4" active style={{ fontWeight: "500" }}>Admin</Nav.Link>
+                        <Nav.Link as={Link} to="deals" className="mr-4" active style={{ fontWeight: "500" }}>Deals</Nav.Link>
+
+                        {loggedInUser?.isSignedIn ?
+                            <>
+                                {
+                                    <OverlayTrigger
+                                        trigger="click"
+                                        key="bottom"
+                                        placement="bottom"
+                                        overlay={
+                                            <Popover id="popover-positioned-bottom">
+                                                <div className="d-flex justify-content-center mt-1">
+                                                    <Image style={{ maxWidth: "60px" }} src={loggedInUser.userPhoto} roundedCircle />
+                                                </div>
+                                                <Popover.Content>
+                                                    <strong className="text-center d-block">{loggedInUser.userName}</strong>
+                                                    <strong className="text-center d-block">{loggedInUser.email}</strong>
+                                                    <div className="d-flex justify-content-center mt-1">
+                                                        <Button onClick={handleSignOut}
+                                                            variant="outline-danger"
+                                                            className="shadow-none py-0 px-1"
+                                                            size="sm">Logout</Button>
+                                                    </div>
+                                                </Popover.Content>
+                                            </Popover>
+                                        }
+                                    >
+                                        <Nav.Link>
+                                            <Image
+                                                src={loggedInUser.userPhoto}
+                                                width="40"
+                                                height="40"
+                                                roundedCircle
+                                                className="d-inline-block align-top"
+                                                alt="Profile"
+                                            />
+                                        </Nav.Link>
+                                    </OverlayTrigger>
+                                }
+                            </>
+                            :
+                            <Button as={Link} to="login" className="shadow-none px-4 py-2" variant="info">
                                 Login
                             </Button>
-                        </Nav>
-                    </Navbar.Collapse>
+                        }
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         </Container>
     );

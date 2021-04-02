@@ -1,25 +1,28 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
 const AddProduct = () => {
-    const { register, handleSubmit, errors } = useForm();
+    const { register, handleSubmit } = useForm();
     const [imageURL, setImageURL] = useState("");
 
     const onSubmit = data => {
         const productInfo = {
             productName: data.name,
             price: data.price,
+            category: data.category,
             productImage: imageURL
         }
 
-        axios.post('http://localhost:5000/addProduct', productInfo)
+        axios.post('https://electro-server.herokuapp.com/addProduct', productInfo)
             .then(response => {
                 response.data && console.log("Successfully Added");
             })
             .catch(error => {
                 console.log(error);
-            });;
+            });
     }
 
     const handleImageUpload = event => {
@@ -39,15 +42,67 @@ const AddProduct = () => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input name="name" type="text" ref={register} placeholder="Enter name" />
-                <br />
-                <input name="price" type="number" ref={register} placeholder="Enter price" />
-                <br />
-                <input name="photo" type="file" ref={register} onChange={handleImageUpload} placeholder="Enter price" />
-                <br />
-                <input type="submit" />
-            </form>
+            <Form onSubmit={handleSubmit(onSubmit)}>
+                <div className="p-5 mx-md-5 mt-5 bg-white" style={{ borderRadius: "15px" }}>
+                    <Form.Row>
+                        <Form.Group as={Col} md={6} sm={12}>
+                            <Form.Label style={{ fontWeight: "bold" }}>Product Name</Form.Label>
+                            <Form.Control
+                                className="shadow-none"
+                                name="name"
+                                type="text"
+                                ref={register}
+                                placeholder="Enter Name" />
+                        </Form.Group>
+
+                        <Form.Group as={Col}>
+                            <Form.Label style={{ fontWeight: "bold" }}>Category</Form.Label>
+                            <Form.Control className="shadow-none"
+                                name="category"
+                                type="text"
+                                ref={register}
+                                placeholder="Enter Category" />
+                        </Form.Group>
+                    </Form.Row>
+
+                    <Form.Row>
+                        <Form.Group as={Col}>
+                            <Form.Label style={{ fontWeight: "bold" }}>Add Price</Form.Label>
+                            <Form.Control
+                                className="shadow-none"
+                                name="price"
+                                type="text"
+                                ref={register}
+                                placeholder="Enter Price" />
+                        </Form.Group>
+
+                        <Form.Group as={Col}>
+                            <Form.Label style={{ fontWeight: "bold" }}>Add Photo</Form.Label>
+                            <Button
+                                as={"label"}
+                                htmlFor="upload"
+                                variant="outline-info"
+                                className="d-block px-3 upload-btn">
+                                <AiOutlineCloudUpload style={{ fontSize: "1.5rem" }} /> Upload Photo
+                            </Button>
+                            <Form.Control
+                                hidden="hidden"
+                                id="upload"
+                                name="photo"
+                                type="file"
+                                ref={register}
+                                onChange={handleImageUpload}
+                                placeholder="Upload photo" />
+                        </Form.Group>
+                    </Form.Row>
+                </div>
+
+                <div className="text-right mr-5 mt-4">
+                    <Button className="px-4 shadow-none" variant="info" type="submit">
+                        Save
+                    </Button>
+                </div>
+            </Form>
         </div>
     );
 };
