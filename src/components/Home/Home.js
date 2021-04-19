@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import PuffLoader from "react-spinners/PuffLoader";
+import Footer from '../Footer/Footer';
 import Product from '../Product/Product';
 
 const loaderStyle = `
@@ -16,7 +17,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://electro-server.herokuapp.com/products')
+        axios.get('http://localhost:5000/products')
             .then(response => {
                 setProducts(response.data);
                 setLoading(false);
@@ -27,7 +28,15 @@ const Home = () => {
     }, [])
 
     const onSubmit = data => {
-        console.log(data);
+        setLoading(true);
+        axios.get(`http://localhost:5000/search?keyword=${data.keyword}`)
+            .then(response => {
+                setProducts(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     return (
@@ -37,11 +46,12 @@ const Home = () => {
                 <button className="search-btn">Search</button>
             </form>
             <PuffLoader loading={loading} css={loaderStyle} color={"#FF4B2B"} size={150} />
-            <Row xs={1} md={2} lg={3} className="g-4 mt-5">
+            <Row xs={1} md={2} lg={3} className="g-4 my-5">
                 {
                     products.map(product => <Product key={product._id} product={product} />)
                 }
             </Row>
+            {!loading && <Footer />}
         </Container>
     );
 };

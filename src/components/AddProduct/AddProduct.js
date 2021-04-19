@@ -4,9 +4,9 @@ import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-const AddProduct = () => {
+const AddProduct = ({ editProduct, updateProduct }) => {
     const { register, handleSubmit } = useForm();
-    const [imageURL, setImageURL] = useState("");
+    const [imageURL, setImageURL] = useState("" || editProduct?.productImage);
 
     const onSubmit = data => {
         const productInfo = {
@@ -16,9 +16,12 @@ const AddProduct = () => {
             productImage: imageURL
         }
         if (!imageURL) {
-           return alert('Please wait for the image upload')
-       }
-        axios.post('https://electro-server.herokuapp.com/addProduct', productInfo)
+            return alert('Please wait for the image upload')
+        }
+        if (editProduct?._id) {
+            return updateProduct(productInfo)
+        }
+        axios.post('http://localhost:5000/addProduct', productInfo)
             .then(response => {
                 response.data && console.log("Successfully Added");
             })
@@ -52,6 +55,7 @@ const AddProduct = () => {
                                 className="shadow-none"
                                 name="name"
                                 type="text"
+                                defaultValue={editProduct?.productName}
                                 ref={register}
                                 placeholder="Enter Name" />
                         </Form.Group>
@@ -61,6 +65,7 @@ const AddProduct = () => {
                             <Form.Control className="shadow-none"
                                 name="category"
                                 type="text"
+                                defaultValue={editProduct?.category}
                                 ref={register}
                                 placeholder="Enter Category" />
                         </Form.Group>
@@ -73,19 +78,30 @@ const AddProduct = () => {
                                 className="shadow-none"
                                 name="price"
                                 type="text"
+                                defaultValue={editProduct?.price}
                                 ref={register}
                                 placeholder="Enter Price" />
                         </Form.Group>
 
                         <Form.Group as={Col}>
                             <Form.Label style={{ fontWeight: "bold" }}>Add Photo</Form.Label>
-                            <Button
-                                as={"label"}
-                                htmlFor="upload"
-                                variant="outline-info"
-                                className="d-block px-3 upload-btn">
-                                <AiOutlineCloudUpload style={{ fontSize: "1.5rem" }} /> Upload Photo
-                            </Button>
+                            {editProduct?._id ?
+                                <Button
+                                    as={"label"}
+                                    htmlFor="upload"
+                                    variant="outline-success"
+                                    className="d-block px-2 upload-btn"
+                                    style={{ maxWidth: "220px" }}>
+                                    <AiOutlineCloudUpload style={{ fontSize: "1.5rem" }} /> Upload New Photo
+                                </Button>
+                                :
+                                <Button
+                                    as={"label"}
+                                    htmlFor="upload"
+                                    variant="outline-info"
+                                    className="d-block px-3 upload-btn">
+                                    <AiOutlineCloudUpload style={{ fontSize: "1.5rem" }} /> Upload Photo
+                                </Button>}
                             <Form.Control
                                 hidden="hidden"
                                 id="upload"
@@ -99,8 +115,8 @@ const AddProduct = () => {
                 </div>
 
                 <div className="text-right mr-5 mt-4">
-                    <Button className="px-4 shadow-none" variant="info" type="submit">
-                        Save
+                    <Button type="submit" variant={editProduct?._id ? "success" : "info"} className="shadow-none">
+                        {editProduct?._id ? "Update" : "Save"}
                     </Button>
                 </div>
             </Form>

@@ -24,6 +24,15 @@ export const handleFbSignIn = () => {
         .catch(error => console.log(error.message))
 }
 
+export const handleGhSignIn = () => {
+    const ghProvider = new firebase.auth.GithubAuthProvider();
+    return firebase
+        .auth()
+        .signInWithPopup(ghProvider)
+        .then((res) => handleResponse(res))
+        .catch(error => console.log(error.message))
+}
+
 export const createUserWithEmailAndPassword = (name, email, password) => {
     return firebase
         .auth()

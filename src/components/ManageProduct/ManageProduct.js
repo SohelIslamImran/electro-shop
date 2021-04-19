@@ -10,12 +10,12 @@ const loaderStyle = `
   color: #7386D5;
 `;
 
-const ManageProduct = () => {
+const ManageProduct = ({ setEditProduct }) => {
     const [items, setItems] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('https://electro-server.herokuapp.com/products')
+        axios.get('http://localhost:5000/products')
             .then(response => {
                 setItems(response.data);
                 setLoading(false);
@@ -28,7 +28,7 @@ const ManageProduct = () => {
     const handleDeleteItem = id => {
         const removedItems = items.filter(item => item._id !== id);
 
-        axios.delete(`https://electro-server.herokuapp.com/delete/${id}`)
+        axios.delete(`http://localhost:5000/delete/${id}`)
             .then(response => {
                 response && setItems(removedItems);;
             })
@@ -50,7 +50,7 @@ const ManageProduct = () => {
                 </thead>
                 <ClipLoader loading={loading} css={loaderStyle} />
                 {
-                    items.map(item => <ActionItem item={item} key={item._id} handleDeleteItem={handleDeleteItem} />)
+                    items.map(item => <ActionItem item={item} key={item._id} handleDeleteItem={handleDeleteItem} setEditProduct={setEditProduct} />)
                 }
             </Table>
         </div>

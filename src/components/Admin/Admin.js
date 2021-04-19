@@ -8,6 +8,7 @@ import AdminNavbar from './AdminNavbar';
 
 const Admin = () => {
     const { adminPanel } = useParams();
+    const [editProduct, setEditProduct] = useState({});
     const [showSidebar, setShowSidebar] = useState(false);
 
     return (
@@ -17,8 +18,8 @@ const Admin = () => {
                 <div id="content">
                     <AdminNavbar setShowSidebar={setShowSidebar} show={showSidebar} />
                     {adminPanel === "addProduct" ? <AddProduct />
-                        : adminPanel === "editProduct" ? <EditProduct />
-                            : <ManageProduct />}
+                        : adminPanel === "editProduct" ? <EditProduct editProduct={editProduct} setEditProduct={setEditProduct} />
+                            : <ManageProduct setEditProduct={setEditProduct} />}
                 </div>
             </div>
         </>

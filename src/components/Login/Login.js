@@ -4,7 +4,7 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { UserContext } from "../../App";
 import './Login.css';
-import { createUserWithEmailAndPassword, handleFbSignIn, handleGoogleSignIn, initializeLoginFramework, signInWithEmailAndPassword } from './LoginManager';
+import { createUserWithEmailAndPassword, handleFbSignIn, handleGhSignIn, handleGoogleSignIn, initializeLoginFramework, signInWithEmailAndPassword } from './LoginManager';
 
 const Login = () => {
     const { setLoggedInUser } = useContext(UserContext);
@@ -36,6 +36,14 @@ const Login = () => {
 
     const fbSignIn = () => {
         handleFbSignIn()
+            .then(res => {
+                setUser(res);
+                history.replace(from);
+            });
+    }
+
+    const GhSignIn = () => {
+        handleGhSignIn()
             .then(res => {
                 setUser(res);
                 history.replace(from);
@@ -76,7 +84,7 @@ const Login = () => {
                             <Link onClick={googleSignIn} className="social">
                                 <FaGoogle />
                             </Link>
-                            <Link className="social">
+                            <Link onClick={GhSignIn} className="social">
                                 <FaGithub />
                             </Link>
                         </div>

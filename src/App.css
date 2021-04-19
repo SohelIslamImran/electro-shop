@@ -277,3 +277,37 @@ a.article:hover {
     transform: rotate(-45deg) translate(1px, -1px);
   }
 }
+
+/* Footer */
+
+.section-footer ul li {
+  margin-bottom: 5px;
+}
+
+.section-footer ul a {
+  color: inherit;
+}
+
+.section-footer ul a:hover {
+  color: #ff4b2b;
+}
+
+.section-footer .logo-footer {
+  height: 40px;
+}
+
+.section-footer .title {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #1e2024;
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer-copyright {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
