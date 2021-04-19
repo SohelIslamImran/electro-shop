@@ -16,7 +16,7 @@ const EditProduct = ({ editProduct, setEditProduct }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/products')
+        axios.get('https://electro-server.herokuapp.com/products')
             .then(response => {
                 setItems(response.data);
                 setLoading(false);
@@ -27,7 +27,7 @@ const EditProduct = ({ editProduct, setEditProduct }) => {
     }, [])
 
     const updateProduct = product => {
-        axios.patch(`http://localhost:5000/update/${editProduct?._id}`, product)
+        axios.patch(`https://electro-server.herokuapp.com/update/${editProduct?._id}`, product)
             .then(response => {
                 response.data && console.log("Successfully Update");
             })

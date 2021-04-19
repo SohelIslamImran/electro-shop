@@ -17,7 +17,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/products')
+        axios.get('https://electro-server.herokuapp.com/products')
             .then(response => {
                 setProducts(response.data);
                 setLoading(false);
@@ -29,7 +29,7 @@ const Home = () => {
 
     const onSubmit = data => {
         setLoading(true);
-        axios.get(`http://localhost:5000/search?keyword=${data.keyword}`)
+        axios.get(`https://electro-server.herokuapp.com/search?keyword=${data.keyword}`)
             .then(response => {
                 setProducts(response.data);
                 setLoading(false);

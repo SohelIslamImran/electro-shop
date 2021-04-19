@@ -21,7 +21,7 @@ const AddProduct = ({ editProduct, updateProduct }) => {
         if (editProduct?._id) {
             return updateProduct(productInfo)
         }
-        axios.post('http://localhost:5000/addProduct', productInfo)
+        axios.post('https://electro-server.herokuapp.com/addProduct', productInfo)
             .then(response => {
                 response.data && console.log("Successfully Added");
             })
