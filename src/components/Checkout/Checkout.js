@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext } from 'react';
 import { Button, Container, Table } from 'react-bootstrap';
+import swal from 'sweetalert';
 import { UserContext } from '../../App';
 
 const Checkout = () => {
@@ -12,11 +13,9 @@ const Checkout = () => {
 
         axios.post('https://electro-server.herokuapp.com/addOrder', oderDetails)
             .then(response => {
-                response.data && console.log("Successfully Added");
+                response.data && swal("Order placed successfully", "Your order placed successfully!", "success");
             })
-            .catch(error => {
-                console.log(error);
-            });;
+            .catch(error => console.log(error));
     }
 
     return (

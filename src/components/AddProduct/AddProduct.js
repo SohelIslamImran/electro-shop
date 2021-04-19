@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { AiOutlineCloudUpload } from "react-icons/ai";
+import swal from 'sweetalert';
 
 const AddProduct = ({ editProduct, updateProduct }) => {
     const { register, handleSubmit } = useForm();
@@ -16,18 +17,14 @@ const AddProduct = ({ editProduct, updateProduct }) => {
             productImage: imageURL
         }
         if (!imageURL) {
-            return alert('Please wait for the image upload')
+            return swal("Image is uploading...", "Please wait some seconds!", "info")
         }
         if (editProduct?._id) {
             return updateProduct(productInfo)
         }
         axios.post('https://electro-server.herokuapp.com/addProduct', productInfo)
-            .then(response => {
-                response.data && console.log("Successfully Added");
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            .then(response => response.data && swal("Successfully Added", "Your product is successfully added!", "success"))
+            .catch(error => console.log(error));
     }
 
     const handleImageUpload = event => {

@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import ClipLoader from "react-spinners/ClipLoader";
+import swal from 'sweetalert';
 import ActionItem from '../ActionItem/ActionItem';
 import AddProduct from '../AddProduct/AddProduct';
 
@@ -28,12 +29,8 @@ const EditProduct = ({ editProduct, setEditProduct }) => {
 
     const updateProduct = product => {
         axios.patch(`https://electro-server.herokuapp.com/update/${editProduct?._id}`, product)
-            .then(response => {
-                response.data && console.log("Successfully Update");
-            })
-            .catch(error => {
-                console.log(error);
-            });
+            .then(response => response.data && swal("Successfully updated", "Your product is successfully updated!", "success"))
+            .catch(error => console.log(error));
     }
 
     return (
