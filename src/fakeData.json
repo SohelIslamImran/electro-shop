@@ -1,0 +1,86 @@
+[
+    {
+        "_id": {"$oid":"60b21b6cb2c0c70015bc65df"},
+        "productName": "Laptop",
+        "price": "200",
+        "category": "Laptop",
+        "productImage": "https://i.ibb.co/Msf9xtn/product-1.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21bb7b2c0c70015bc65e0"},
+        "productName": "Laptop",
+        "price": "400",
+        "category": "Laptop",
+        "productImage": "https://i.ibb.co/xh360t5/product-9-300x330.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21be8b2c0c70015bc65e1"},
+        "productName": "Headphone",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/crsXR6X/product-6.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21bebb2c0c70015bc65e2"},
+        "productName": "Red Phone",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/s6Q0GHM/redPhone.png"
+    },
+    {
+        "_id": {"$oid":"60b21bedb2c0c70015bc65e3"},
+        "productName": "Game Box",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/ZX49fZM/game1.png"
+    },
+    {
+        "_id": {"$oid":"60b21bf5b2c0c70015bc65e4"},
+        "productName": "Headphone",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/C66Syy5/Image-1.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21bf8b2c0c70015bc65e5"},
+        "productName": "Airpods Readme",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/BsfvGbq/3.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21bfcb2c0c70015bc65e6"},
+        "productName": "Redmi Phone",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/415w3RP/12.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21bfeb2c0c70015bc65e7"},
+        "productName": "Ultra HD TV",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/9YRFVg2/10.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21c00b2c0c70015bc65e8"},
+        "productName": "Desh Home",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/qxS84xT/9.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21c02b2c0c70015bc65e9"},
+        "productName": "Sound Box",
+        "price": "300",
+        "category": "Headphone",
+        "productImage": "https://i.ibb.co/0F0Q5rk/11.jpg"
+    },
+    {
+        "_id": {"$oid":"60b21c30b2c0c70015bc65ea"},
+        "productName": "Electro Shop",
+        "price": "200",
+        "category": "Laptop",
+        "productImage": "https://i.ibb.co/YBVKL8H/product-11-450x494.jpg"
+    }
+]
